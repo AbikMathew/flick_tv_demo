@@ -1,12 +1,12 @@
 # Flick TV Demo
 
-A beautifully animated Flutter demo showcasing TV show discovery with smooth card animations and confetti effects.
+A beautifully animated Flutter demo showcasing blinkit success screen with smooth card animations and confetti effects.
 
 ## Features
 
-- 🎬 TV show discovery feed
+- 🎬 No third-part packages used
 - ✨ Smooth card animations with confetti burst
-- 🎯 Responsive UI with custom animations
+- 🎯 UI with custom animations
 - 📱 Built with Flutter & BLoC architecture
 
 ## Demo
