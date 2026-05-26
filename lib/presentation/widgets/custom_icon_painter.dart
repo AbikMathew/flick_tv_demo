@@ -1,12 +1,9 @@
 import 'dart:math' as math;
+
 import 'package:flutter/material.dart';
 
 class CustomIcon extends StatelessWidget {
-  const CustomIcon({
-    super.key,
-    required this.type,
-    this.size = 56,
-  });
+  const CustomIcon({super.key, required this.type, this.size = 56});
 
   final String type;
   final double size;
@@ -18,16 +15,11 @@ class CustomIcon extends StatelessWidget {
       height: size,
       decoration: BoxDecoration(
         color: const Color(0xFF0F0F11),
-        borderRadius: BorderRadius.circular(14),
-        border: Border.all(
-          color: const Color(0xFF2C2C2E),
-          width: 1,
-        ),
+        borderRadius: BorderRadius.circular(12),
+        border: Border.all(color: const Color(0xFF2C2C2E), width: 1),
       ),
       padding: const EdgeInsets.all(8),
-      child: CustomPaint(
-        painter: _IconPainter(type: type),
-      ),
+      child: CustomPaint(painter: _IconPainter(type: type)),
     );
   }
 }
@@ -67,7 +59,7 @@ class _IconPainter extends CustomPainter {
       ..color = const Color(0xFFE2B71B)
       ..style = PaintingStyle.stroke
       ..strokeWidth = 2.0;
-    
+
     final phoneRect = RRect.fromRectAndRadius(
       Rect.fromLTWH(w * 0.15, h * 0.05, w * 0.45, h * 0.85),
       const Radius.circular(6),
@@ -76,7 +68,7 @@ class _IconPainter extends CustomPainter {
 
     // Phone home button or speaker
     final detailPaint = Paint()
-      ..color = const Color(0xFFE2B71B).withOpacity(0.5)
+      ..color = const Color(0xFFE2B71B).withValues(alpha: 0.5)
       ..style = PaintingStyle.fill;
     canvas.drawCircle(Offset(w * 0.375, h * 0.15), 1.5, detailPaint);
     canvas.drawCircle(Offset(w * 0.375, h * 0.8), 2.5, detailPaint);
@@ -112,7 +104,7 @@ class _IconPainter extends CustomPainter {
 
     // Tap Ripple effect (circular arcs at tap location)
     final ripplePaint = Paint()
-      ..color = const Color(0xFFFF5252).withOpacity(0.8)
+      ..color = const Color(0xFFFF5252).withValues(alpha: 0.8)
       ..style = PaintingStyle.stroke
       ..strokeWidth = 2.0;
 
@@ -144,7 +136,8 @@ class _IconPainter extends CustomPainter {
 
     // Signal/Wifi waves at top right
     final wifiPaint = Paint()
-      ..color = const Color(0xFF39A845) // Green check/signal
+      ..color =
+          const Color(0xFF39A845) // Green check/signal
       ..style = PaintingStyle.stroke
       ..strokeCap = StrokeCap.round;
 
@@ -166,7 +159,11 @@ class _IconPainter extends CustomPainter {
       wifiPaint,
     );
     // Center point
-    canvas.drawCircle(Offset(w * 0.7, h * 0.35), 2, wifiPaint..style = PaintingStyle.fill);
+    canvas.drawCircle(
+      Offset(w * 0.7, h * 0.35),
+      2,
+      wifiPaint..style = PaintingStyle.fill,
+    );
 
     // Hand holding phone from left
     final handPaint = Paint()
@@ -197,7 +194,7 @@ class _IconPainter extends CustomPainter {
     canvas.save();
     canvas.translate(w * 0.45, h * 0.45);
     canvas.rotate(-0.3);
-    
+
     final cardPaint = Paint()
       ..color = const Color(0xFFE2B71B)
       ..style = PaintingStyle.fill;
@@ -237,7 +234,10 @@ class _IconPainter extends CustomPainter {
       ..strokeWidth = 2.0
       ..strokeCap = StrokeCap.round;
 
-    final arrowRect = Rect.fromCircle(center: Offset(w * 0.22, h * 0.45), radius: 10);
+    final arrowRect = Rect.fromCircle(
+      center: Offset(w * 0.22, h * 0.45),
+      radius: 10,
+    );
     // Draw 3/4 circle
     canvas.drawArc(arrowRect, -0.5, 4.8, false, arrowPaint);
 
@@ -294,9 +294,15 @@ class _IconPainter extends CustomPainter {
       ..style = PaintingStyle.fill;
 
     // Vertical ribbon
-    canvas.drawRect(Rect.fromLTWH(w * 0.45, h * 0.28, w * 0.1, h * 0.62), ribbonPaint);
+    canvas.drawRect(
+      Rect.fromLTWH(w * 0.45, h * 0.28, w * 0.1, h * 0.62),
+      ribbonPaint,
+    );
     // Horizontal ribbon on box
-    canvas.drawRect(Rect.fromLTWH(w * 0.18, h * 0.58, w * 0.64, h * 0.08), ribbonPaint);
+    canvas.drawRect(
+      Rect.fromLTWH(w * 0.18, h * 0.58, w * 0.64, h * 0.08),
+      ribbonPaint,
+    );
 
     // Beautiful Red Bow at the top
     final bowPaint = Paint()

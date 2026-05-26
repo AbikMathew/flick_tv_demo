@@ -1,13 +1,11 @@
 import 'package:flutter/material.dart';
+
 import '../../core/theme/app_theme.dart';
 import '../../domain/entities/feature_item.dart';
 import 'custom_icon_painter.dart';
 
 class FeatureCard extends StatelessWidget {
-  const FeatureCard({
-    super.key,
-    required this.item,
-  });
+  const FeatureCard({super.key, required this.item});
 
   final FeatureItem item;
 
@@ -17,14 +15,13 @@ class FeatureCard extends StatelessWidget {
       margin: const EdgeInsets.only(bottom: 12),
       width: double.infinity,
       decoration: BoxDecoration(
-        color: AppTheme.cardBg.withOpacity(0.85), // Semi-transparent glass look
-        borderRadius: BorderRadius.circular(20),
-        border: Border.all(
-          color: AppTheme.cardBorder,
-          width: 1.0,
-        ),
+        color: AppTheme.cardBg.withValues(
+          alpha: 0.85,
+        ), // Semi-transparent glass look
+        borderRadius: BorderRadius.circular(12),
+        border: Border.all(color: AppTheme.cardBorder, width: 1.0),
       ),
-      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
@@ -40,17 +37,17 @@ class FeatureCard extends StatelessWidget {
                 Text(
                   item.title,
                   style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                        letterSpacing: 0.15,
-                        fontWeight: FontWeight.w700,
-                      ),
+                    letterSpacing: 0.15,
+                    fontWeight: FontWeight.w700,
+                  ),
                 ),
-                const SizedBox(height: 4),
+                const SizedBox(height: 2),
                 Text(
                   item.description,
                   style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                        color: AppTheme.textSecondary,
-                        height: 1.25,
-                      ),
+                    color: AppTheme.textSecondary,
+                    height: 1.25,
+                  ),
                 ),
               ],
             ),

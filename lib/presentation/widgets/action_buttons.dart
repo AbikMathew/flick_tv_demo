@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import '../../core/theme/app_theme.dart';
 import 'custom_icon_painter.dart';
 
@@ -11,7 +12,8 @@ class AddMoneyButton extends StatefulWidget {
   State<AddMoneyButton> createState() => _AddMoneyButtonState();
 }
 
-class _AddMoneyButtonState extends State<AddMoneyButton> with SingleTickerProviderStateMixin {
+class _AddMoneyButtonState extends State<AddMoneyButton>
+    with SingleTickerProviderStateMixin {
   late final AnimationController _scaleController;
   late final Animation<double> _scaleAnimation;
 
@@ -22,9 +24,10 @@ class _AddMoneyButtonState extends State<AddMoneyButton> with SingleTickerProvid
       vsync: this,
       duration: const Duration(milliseconds: 100),
     );
-    _scaleAnimation = Tween<double>(begin: 1.0, end: 0.96).animate(
-      CurvedAnimation(parent: _scaleController, curve: Curves.easeOut),
-    );
+    _scaleAnimation = Tween<double>(
+      begin: 1.0,
+      end: 0.96,
+    ).animate(CurvedAnimation(parent: _scaleController, curve: Curves.easeOut));
   }
 
   @override
@@ -55,32 +58,21 @@ class _AddMoneyButtonState extends State<AddMoneyButton> with SingleTickerProvid
       child: AnimatedBuilder(
         animation: _scaleAnimation,
         builder: (context, child) {
-          return Transform.scale(
-            scale: _scaleAnimation.value,
-            child: child,
-          );
+          return Transform.scale(scale: _scaleAnimation.value, child: child);
         },
         child: Container(
           width: double.infinity,
           height: 56,
           decoration: BoxDecoration(
-            color: AppTheme.primaryGreen,
-            borderRadius: BorderRadius.circular(16),
-            boxShadow: [
-              BoxShadow(
-                color: AppTheme.primaryGreen.withOpacity(0.35),
-                blurRadius: 16,
-                offset: const Offset(0, 8),
-                spreadRadius: -2,
-              ),
-            ],
+            color: const Color(0xFF1D6E01),
+            borderRadius: BorderRadius.circular(12),
           ),
           alignment: Alignment.center,
           child: const Text(
             'Add Money',
             style: TextStyle(
               fontSize: 16,
-              fontWeight: FontWeight.bold,
+              fontWeight: FontWeight.w500,
               color: Colors.white,
               letterSpacing: 0.5,
             ),
@@ -100,18 +92,16 @@ class ClaimGiftCardTile extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: onTap,
-      borderRadius: BorderRadius.circular(20),
+      borderRadius: BorderRadius.circular(12),
       child: Container(
         width: double.infinity,
         decoration: BoxDecoration(
-          color: AppTheme.cardBg.withOpacity(0.5), // Lighter glass look
-          borderRadius: BorderRadius.circular(20),
-          border: Border.all(
-            color: AppTheme.cardBorder,
-            width: 1.0,
-          ),
+          color: AppTheme.cardBgSecondary.withValues(
+            alpha: 0.5,
+          ), // Lighter glass look
+          borderRadius: BorderRadius.circular(12),
         ),
-        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
+        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 7),
         child: Row(
           children: [
             // Custom vector gift icon
@@ -125,9 +115,9 @@ class ClaimGiftCardTile extends StatelessWidget {
                   Text(
                     'Claim Gift Card',
                     style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                          fontSize: 15,
-                          fontWeight: FontWeight.w700,
-                        ),
+                      fontSize: 15,
+                      fontWeight: FontWeight.w700,
+                    ),
                   ),
                   const SizedBox(height: 2),
                   const Text(
@@ -169,9 +159,9 @@ class WatermarkFooter extends StatelessWidget {
         style: TextStyle(
           fontSize: 32,
           fontWeight: FontWeight.w900,
-          color: Colors.white.withOpacity(0.06), // Faded watermark styling
+          color: Colors.white.withValues(alpha: 0.1), // Faded watermark styling
           height: 1.15,
-          letterSpacing: 0.5,
+          letterSpacing: 1.5,
         ),
       ),
     );

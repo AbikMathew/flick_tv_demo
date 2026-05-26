@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import '../../core/theme/app_theme.dart';
 
 class WalletWidget extends StatelessWidget {
@@ -14,16 +15,14 @@ class WalletWidget extends StatelessWidget {
         decoration: BoxDecoration(
           boxShadow: [
             BoxShadow(
-              color: Colors.black.withOpacity(0.4),
+              color: Colors.black.withValues(alpha: 0.4),
               blurRadius: 24,
               offset: const Offset(4, 16),
               spreadRadius: -2,
             ),
           ],
         ),
-        child: CustomPaint(
-          painter: _WalletPainter(),
-        ),
+        child: CustomPaint(painter: _WalletPainter()),
       ),
     );
   }
@@ -51,7 +50,7 @@ class _WalletPainter extends CustomPainter {
 
     // Subtle dark shadow inside the back fold for depth
     final Paint backInnerShadowPaint = Paint()
-      ..color = Colors.black.withOpacity(0.3)
+      ..color = Colors.black.withValues(alpha: 0.3)
       ..style = PaintingStyle.stroke
       ..strokeWidth = 2;
     canvas.drawRRect(backRRect, backInnerShadowPaint);
@@ -72,7 +71,7 @@ class _WalletPainter extends CustomPainter {
 
     // Highlight border for front cardholder (gold shine)
     final Paint frontHighlightPaint = Paint()
-      ..color = const Color(0xFFFFE97F).withOpacity(0.3)
+      ..color = const Color(0xFFFFE97F).withValues(alpha: 0.3)
       ..style = PaintingStyle.stroke
       ..strokeWidth = 1.5;
     canvas.drawRRect(frontRRect, frontHighlightPaint);
@@ -89,7 +88,7 @@ class _WalletPainter extends CustomPainter {
           fontFamily: 'Roboto', // Ensures proper Rupee symbol rendering
           shadows: [
             Shadow(
-              color: Colors.black.withOpacity(0.15),
+              color: Colors.black.withValues(alpha: 0.15),
               offset: const Offset(2, 2),
               blurRadius: 4,
             ),
@@ -98,13 +97,13 @@ class _WalletPainter extends CustomPainter {
       ),
       textDirection: TextDirection.ltr,
     );
-    
+
     textPainter.layout();
-    
+
     // Position text in the center of the front fold
     final double textX = (w - textPainter.width) / 2;
     final double textY = h * 0.18 + (h * 0.82 - textPainter.height) / 2 - 2;
-    
+
     // Draw the symbol slightly tilted forward or centered
     canvas.save();
     // Shift slightly to account for font offset

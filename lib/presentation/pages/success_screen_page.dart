@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import '../../core/bloc/bloc_provider.dart';
 import '../cubit/success_screen_cubit.dart';
 import '../cubit/success_screen_state.dart';
@@ -15,9 +16,11 @@ class SuccessScreenPage extends StatefulWidget {
   State<SuccessScreenPage> createState() => _SuccessScreenPageState();
 }
 
-class _SuccessScreenPageState extends State<SuccessScreenPage> with SingleTickerProviderStateMixin {
+class _SuccessScreenPageState extends State<SuccessScreenPage>
+    with SingleTickerProviderStateMixin {
   late final AnimationController _animationController;
-  final GlobalKey<ConfettiOverlayState> _confettiKey = GlobalKey<ConfettiOverlayState>();
+  final GlobalKey<ConfettiOverlayState> _confettiKey =
+      GlobalKey<ConfettiOverlayState>();
 
   // Staggered Animations
   late final Animation<double> _walletScale;
@@ -67,12 +70,13 @@ class _SuccessScreenPageState extends State<SuccessScreenPage> with SingleTicker
         curve: const Interval(0.55, 0.75, curve: Curves.easeOut),
       ),
     );
-    _titleSlide = Tween<Offset>(begin: const Offset(0.0, 0.4), end: Offset.zero).animate(
-      CurvedAnimation(
-        parent: _animationController,
-        curve: const Interval(0.55, 0.75, curve: Curves.easeOutBack),
-      ),
-    );
+    _titleSlide = Tween<Offset>(begin: const Offset(0.0, 0.4), end: Offset.zero)
+        .animate(
+          CurvedAnimation(
+            parent: _animationController,
+            curve: const Interval(0.55, 0.75, curve: Curves.easeOutBack),
+          ),
+        );
 
     // 5. Card 1 Animation
     _card1Fade = Tween<double>(begin: 0.0, end: 1.0).animate(
@@ -81,12 +85,13 @@ class _SuccessScreenPageState extends State<SuccessScreenPage> with SingleTicker
         curve: const Interval(0.65, 0.85, curve: Curves.easeOut),
       ),
     );
-    _card1Slide = Tween<Offset>(begin: const Offset(0.0, 0.3), end: Offset.zero).animate(
-      CurvedAnimation(
-        parent: _animationController,
-        curve: const Interval(0.65, 0.85, curve: Curves.easeOutQuad),
-      ),
-    );
+    _card1Slide = Tween<Offset>(begin: const Offset(0.0, 0.3), end: Offset.zero)
+        .animate(
+          CurvedAnimation(
+            parent: _animationController,
+            curve: const Interval(0.65, 0.85, curve: Curves.easeOutQuad),
+          ),
+        );
 
     // 6. Card 2 Animation
     _card2Fade = Tween<double>(begin: 0.0, end: 1.0).animate(
@@ -95,12 +100,13 @@ class _SuccessScreenPageState extends State<SuccessScreenPage> with SingleTicker
         curve: const Interval(0.75, 0.95, curve: Curves.easeOut),
       ),
     );
-    _card2Slide = Tween<Offset>(begin: const Offset(0.0, 0.3), end: Offset.zero).animate(
-      CurvedAnimation(
-        parent: _animationController,
-        curve: const Interval(0.75, 0.95, curve: Curves.easeOutQuad),
-      ),
-    );
+    _card2Slide = Tween<Offset>(begin: const Offset(0.0, 0.3), end: Offset.zero)
+        .animate(
+          CurvedAnimation(
+            parent: _animationController,
+            curve: const Interval(0.75, 0.95, curve: Curves.easeOutQuad),
+          ),
+        );
 
     // 7. Card 3 Animation
     _card3Fade = Tween<double>(begin: 0.0, end: 1.0).animate(
@@ -109,12 +115,13 @@ class _SuccessScreenPageState extends State<SuccessScreenPage> with SingleTicker
         curve: const Interval(0.78, 0.94, curve: Curves.easeOut),
       ),
     );
-    _card3Slide = Tween<Offset>(begin: const Offset(0.0, 0.3), end: Offset.zero).animate(
-      CurvedAnimation(
-        parent: _animationController,
-        curve: const Interval(0.78, 0.94, curve: Curves.easeOutQuad),
-      ),
-    );
+    _card3Slide = Tween<Offset>(begin: const Offset(0.0, 0.3), end: Offset.zero)
+        .animate(
+          CurvedAnimation(
+            parent: _animationController,
+            curve: const Interval(0.78, 0.94, curve: Curves.easeOutQuad),
+          ),
+        );
 
     // 8. Actions (Add money & Claim Gift Card) Entrance
     _actionsFade = Tween<double>(begin: 0.0, end: 1.0).animate(
@@ -123,12 +130,13 @@ class _SuccessScreenPageState extends State<SuccessScreenPage> with SingleTicker
         curve: const Interval(0.86, 0.98, curve: Curves.easeOut),
       ),
     );
-    _actionsSlide = Tween<Offset>(begin: const Offset(0.0, 0.25), end: Offset.zero).animate(
-      CurvedAnimation(
-        parent: _animationController,
-        curve: const Interval(0.86, 0.98, curve: Curves.easeOutQuad),
-      ),
-    );
+    _actionsSlide =
+        Tween<Offset>(begin: const Offset(0.0, 0.25), end: Offset.zero).animate(
+          CurvedAnimation(
+            parent: _animationController,
+            curve: const Interval(0.86, 0.98, curve: Curves.easeOutQuad),
+          ),
+        );
 
     // 9. Navigation buttons fade in at the end
     _appBarFade = Tween<double>(begin: 0.0, end: 1.0).animate(
@@ -158,7 +166,7 @@ class _SuccessScreenPageState extends State<SuccessScreenPage> with SingleTicker
   @override
   Widget build(BuildContext context) {
     final double safeTop = MediaQuery.of(context).padding.top;
-    
+
     return Scaffold(
       body: DottedBackground(
         child: ConfettiOverlay(
@@ -168,10 +176,11 @@ class _SuccessScreenPageState extends State<SuccessScreenPage> with SingleTicker
             builder: (context, constraints) {
               // Calculate responsive heights
               final double screenHeight = constraints.maxHeight;
-              
+
               // Spacing needed to center the wallet vertically on startup
               // Wallet height is 110, we offset by safe padding
-              final double centerSpacerHeight = (screenHeight * 0.45) - 55 - safeTop;
+              final double centerSpacerHeight =
+                  (screenHeight * 0.45) - 55 - safeTop;
               const double topSpacerHeight = 24.0;
 
               return Stack(
@@ -189,9 +198,13 @@ class _SuccessScreenPageState extends State<SuccessScreenPage> with SingleTicker
                               animation: _walletPosition,
                               builder: (context, child) {
                                 // Interpolates spacer height between center state and top state
-                                final double currentSpacer = topSpacerHeight +
-                                    (centerSpacerHeight - topSpacerHeight) * _walletPosition.value;
-                                return SizedBox(height: safeTop + currentSpacer);
+                                final double currentSpacer =
+                                    topSpacerHeight +
+                                    (centerSpacerHeight - topSpacerHeight) *
+                                        _walletPosition.value;
+                                return SizedBox(
+                                  height: safeTop + currentSpacer,
+                                );
                               },
                             ),
 
@@ -213,7 +226,7 @@ class _SuccessScreenPageState extends State<SuccessScreenPage> with SingleTicker
                                     const Text(
                                       'blinkit',
                                       style: TextStyle(
-                                        fontSize: 26,
+                                        fontSize: 28,
                                         fontWeight: FontWeight.w900,
                                         color: Colors.white,
                                         letterSpacing: -0.5,
@@ -226,10 +239,12 @@ class _SuccessScreenPageState extends State<SuccessScreenPage> with SingleTicker
                                         fontSize: 48,
                                         fontWeight: FontWeight.w900,
                                         color: Colors.white,
-                                        letterSpacing: 2.0,
+                                        letterSpacing: 10,
                                         shadows: [
                                           Shadow(
-                                            color: Colors.black.withOpacity(0.3),
+                                            color: Colors.black.withValues(
+                                              alpha: 0.3,
+                                            ),
                                             offset: const Offset(0, 4),
                                             blurRadius: 8,
                                           ),
@@ -245,12 +260,14 @@ class _SuccessScreenPageState extends State<SuccessScreenPage> with SingleTicker
                             // 4. Feature Cards & Buttons List (Dynamic data from Cubit)
                             BlocBuilder<SuccessScreenCubit, SuccessScreenState>(
                               builder: (context, state) {
-                                if (state is SuccessScreenLoading || state is SuccessScreenInitial) {
+                                if (state is SuccessScreenLoading ||
+                                    state is SuccessScreenInitial) {
                                   // Shimmer style or just clean spacer during load (which is fast)
                                   return const SizedBox(height: 300);
                                 }
 
-                                final features = (state as SuccessScreenLoaded).features;
+                                final features =
+                                    (state as SuccessScreenLoaded).features;
 
                                 return Column(
                                   children: [
@@ -283,8 +300,8 @@ class _SuccessScreenPageState extends State<SuccessScreenPage> with SingleTicker
                                           child: FeatureCard(item: features[2]),
                                         ),
                                       ),
-                                    
-                                    const SizedBox(height: 12),
+
+                                    const SizedBox(height: 10),
 
                                     // Staggered Actions Section (Buttons & Banner)
                                     FadeTransition(
@@ -299,13 +316,19 @@ class _SuccessScreenPageState extends State<SuccessScreenPage> with SingleTicker
                                                 _triggerSuccessBurst();
                                               },
                                             ),
-                                            const SizedBox(height: 16),
+                                            const SizedBox(height: 20),
                                             ClaimGiftCardTile(
                                               onTap: () {
-                                                ScaffoldMessenger.of(context).showSnackBar(
+                                                ScaffoldMessenger.of(
+                                                  context,
+                                                ).showSnackBar(
                                                   const SnackBar(
-                                                    content: Text('Gift Card Claim sheet opened'),
-                                                    duration: Duration(seconds: 1),
+                                                    content: Text(
+                                                      'Gift Card Claim sheet opened',
+                                                    ),
+                                                    duration: Duration(
+                                                      seconds: 1,
+                                                    ),
                                                   ),
                                                 );
                                               },
@@ -379,10 +402,10 @@ class _SuccessScreenPageState extends State<SuccessScreenPage> with SingleTicker
   }) {
     return Container(
       decoration: BoxDecoration(
-        color: Colors.black.withOpacity(0.4),
+        color: Colors.black.withValues(alpha: 0.4),
         shape: BoxShape.circle,
         border: Border.all(
-          color: Colors.white.withOpacity(0.08),
+          color: Colors.white.withValues(alpha: 0.08),
           width: 1.0,
         ),
       ),
