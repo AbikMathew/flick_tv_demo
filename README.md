@@ -1,16 +1,34 @@
-# abik
+# Flick TV Demo
 
-A new Flutter project.
+A beautifully animated Flutter demo showcasing TV show discovery with smooth card animations and confetti effects.
 
-## Getting Started
+## Features
 
-This project is a starting point for a Flutter application.
+- 🎬 TV show discovery feed
+- ✨ Smooth card animations with confetti burst
+- 🎯 Responsive UI with custom animations
+- 📱 Built with Flutter & BLoC architecture
 
-A few resources to get you started if this is your first Flutter project:
+## Demo
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+**Video:** [Add demo video here]
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+**Download APK:** [Add APK download link here]
+
+## Tech Stack
+
+- Flutter 3.35+
+- Dart 3.9+
+- BLoC pattern for state management
+
+## Installation
+
+1. Clone the repository
+2. Run `flutter pub get`
+3. Run `flutter run`
+
+## Requirements
+
+- Flutter 3.35+
+- Dart 3.9+
+- Android SDK / iOS development environment
