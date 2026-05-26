@@ -11,9 +11,9 @@ A beautifully animated Flutter demo showcasing blinkit success screen with smoot
 
 ## Demo
 
-**Video:** [Add demo video here]
+**Video:** 
 
-**Download APK:** [Add APK download link here]
+https://github.com/user-attachments/assets/2ebefb9a-71d3-4e91-8bc2-b839e08af47c
 
 ## Tech Stack
 
