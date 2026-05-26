@@ -1,4 +1,5 @@
 import 'dart:math' as math;
+
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 
@@ -16,11 +17,12 @@ class ConfettiOverlay extends StatefulWidget {
   State<ConfettiOverlay> createState() => ConfettiOverlayState();
 }
 
-class ConfettiOverlayState extends State<ConfettiOverlay> with SingleTickerProviderStateMixin {
+class ConfettiOverlayState extends State<ConfettiOverlay>
+    with SingleTickerProviderStateMixin {
   late final Ticker _ticker;
   final List<_Particle> _particles = [];
   final math.Random _random = math.Random();
-  
+
   Duration _lastElapsed = Duration.zero;
   Size _screenSize = Size.zero;
 
@@ -49,30 +51,34 @@ class ConfettiOverlayState extends State<ConfettiOverlay> with SingleTickerProvi
 
   void burst() {
     if (_screenSize == Size.zero) return;
-    
+
     _particles.clear();
     _lastElapsed = Duration.zero;
 
-    final int countPerSide = 65; // High particle count for dense festive feel
+    final int countPerSide = 25; // Increased particle count for extra fullness
 
-    // 1. Left Emitter: shoots upward and to the right
+    // Launch from the middle height of the screen
+    final double emitterY = _screenSize.height * 0.55;
+
+    // 1. Left Emitter: shoots upward and to the right from the middle-left edge
     final double leftX = 0;
-    final double leftY = _screenSize.height;
     for (int i = 0; i < countPerSide; i++) {
-      // Launch angle: between -65 and -20 degrees (in radians)
-      final double angle = -math.pi / 2.8 + (_random.nextDouble() * 0.5 - 0.25);
-      final double speed = 700 + _random.nextDouble() * 750; // pixels per second
-      _particles.add(_generateParticle(leftX, leftY, angle, speed));
+      // Steeper angle (approx -78 to -57 degrees) to shoot higher up
+      final double angle =
+          -math.pi / 2.6 + (_random.nextDouble() * 0.35 - 0.175);
+      final double speed =
+          800 + _random.nextDouble() * 850; // pixels per second
+      _particles.add(_generateParticle(leftX, emitterY, angle, speed));
     }
 
-    // 2. Right Emitter: shoots upward and to the left
+    // 2. Right Emitter: shoots upward and to the left from the middle-right edge
     final double rightX = _screenSize.width;
-    final double rightY = _screenSize.height;
     for (int i = 0; i < countPerSide; i++) {
-      // Launch angle: between -160 and -115 degrees (in radians)
-      final double angle = -math.pi / 1.55 + (_random.nextDouble() * 0.5 - 0.25);
-      final double speed = 700 + _random.nextDouble() * 750;
-      _particles.add(_generateParticle(rightX, rightY, angle, speed));
+      // Steeper angle (approx -123 to -102 degrees) to shoot higher up
+      final double angle =
+          -math.pi * 1.6 / 2.6 + (_random.nextDouble() * 0.35 - 0.175);
+      final double speed = 800 + _random.nextDouble() * 850;
+      _particles.add(_generateParticle(rightX, emitterY, angle, speed));
     }
 
     if (!_ticker.isTicking) {
@@ -80,7 +86,12 @@ class ConfettiOverlayState extends State<ConfettiOverlay> with SingleTickerProvi
     }
   }
 
-  _Particle _generateParticle(double startX, double startY, double angle, double speed) {
+  _Particle _generateParticle(
+    double startX,
+    double startY,
+    double angle,
+    double speed,
+  ) {
     final double sizeWidth = 6.0 + _random.nextDouble() * 8.0;
     final double sizeHeight = 10.0 + _random.nextDouble() * 8.0;
 
@@ -89,8 +100,10 @@ class ConfettiOverlayState extends State<ConfettiOverlay> with SingleTickerProvi
       y: startY,
       vx: math.cos(angle) * speed,
       vy: math.sin(angle) * speed,
-      gravity: 550.0 + _random.nextDouble() * 250.0, // Natural fall acceleration
-      drag: 0.965 + _random.nextDouble() * 0.02,     // Air resistance
+      gravity:
+          1400.0 +
+          _random.nextDouble() * 400.0, // Increased gravity for faster fall
+      drag: 0.965 + _random.nextDouble() * 0.02, // Air resistance
       angle: _random.nextDouble() * math.pi * 2,
       angularVelocity: (_random.nextDouble() * 10 - 5),
       scaleY: _random.nextDouble() * 2 - 1,
@@ -110,7 +123,8 @@ class ConfettiOverlayState extends State<ConfettiOverlay> with SingleTickerProvi
       return;
     }
 
-    final double dt = (elapsed.inMicroseconds - _lastElapsed.inMicroseconds) / 1000000.0;
+    final double dt =
+        (elapsed.inMicroseconds - _lastElapsed.inMicroseconds) / 1000000.0;
     _lastElapsed = elapsed;
 
     bool allDead = true;
@@ -129,8 +143,13 @@ class ConfettiOverlayState extends State<ConfettiOverlay> with SingleTickerProvi
 
       // Add a horizontal waving/swaying wind motion to falling particles
       final double totalSeconds = elapsed.inMilliseconds / 1000.0;
-      final double sway = math.sin(totalSeconds * particle.horizontalDriftFrequency + particle.driftOffset) * 
-          particle.horizontalDriftAmplitude * dt;
+      final double sway =
+          math.sin(
+            totalSeconds * particle.horizontalDriftFrequency +
+                particle.driftOffset,
+          ) *
+          particle.horizontalDriftAmplitude *
+          dt;
       particle.x += sway;
 
       // Update 2D rotation
@@ -247,25 +266,25 @@ class _ConfettiPainter extends CustomPainter {
       }
 
       canvas.save();
-      
+
       // Move to particle coordinate
       canvas.translate(p.x, p.y);
-      
+
       // Apply 2D rotation
       canvas.rotate(p.angle);
-      
+
       // Apply 3D flip (height scale)
       canvas.scale(1.0, p.scaleY);
 
       // Draw particle shape
       paint.color = p.color;
-      
+
       // Draw rectangular flake
       canvas.drawRect(
         Rect.fromLTWH(-p.width / 2, -p.height / 2, p.width, p.height),
         paint,
       );
-      
+
       canvas.restore();
     }
   }
